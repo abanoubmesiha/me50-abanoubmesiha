@@ -11,7 +11,7 @@ int main(void)
     while (number < 1 || number > 8);
     for (int line = 0; line < number; line++)
     { 
-        for (int space = number - line; space > 0; space--)
+        for (int space = number - line - 1; space > 0; space--)
         {
             printf(" ");
         }
