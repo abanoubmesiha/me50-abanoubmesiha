@@ -9,7 +9,7 @@ int main(void)
     {
         change = get_float("change owed: ");
     }
-    while (change > 0.99 || change < 0.1);
+    while (change <= 0);
     int cent = round(change * 100);
     int result = 0;
     
