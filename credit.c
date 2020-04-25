@@ -36,12 +36,16 @@ int main(void)
         long firstNumbers = cardN / pow(10, i); 
         if (firstNumbers == 4) {
             printf("VISA\n");
+            return 1;
         } else if (firstNumbers == 34 || firstNumbers == 37 )
         {
             printf("AMEX\n");
+            return 1;
+            return 1;
         } else if (firstNumbers == 51 || firstNumbers == 52 || firstNumbers == 53 ||                        firstNumbers == 54 || firstNumbers == 55)
         {
             printf("MASTERCARD\n");
+            return 1;
         }
     }
     printf("INVALID\n");
