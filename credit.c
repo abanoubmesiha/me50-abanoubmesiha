@@ -38,12 +38,13 @@ int main(void)
             printf("VISA\n");
         } else if (firstNumbers == 34 || firstNumbers == 37 )
         {
-            printf("American Express\n");
+            printf("AMEX\n");
         } else if (firstNumbers == 51 || firstNumbers == 52 || firstNumbers == 53 ||                        firstNumbers == 54 || firstNumbers == 55)
         {
-            printf("Master Card\n");
+            printf("MASTERCARD\n");
         }
     }
+    printf("INVALID\n");
     } else {printf("INVALID\n");}
     // printf("%i\n%i\n", lastPlus, secLastPlus);
     
