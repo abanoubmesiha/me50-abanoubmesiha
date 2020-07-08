@@ -41,6 +41,9 @@ int main(int argc, string argv[])
             int c = ((ASCII-96) + checkedKey) % 26;
             // ciphertext[i] = c + 96;
             printf("%c",c + 96);
+        } else if (ASCII >= 64 && ASCII <= 90) {
+            int c = ((ASCII-63) + checkedKey) % 26;
+            printf("%c",c + 63);
         }
     }
     printf("\n");
