@@ -44,6 +44,8 @@ int main(int argc, string argv[])
         } else if (ASCII >= 64 && ASCII <= 90) {
             int c = ((ASCII-63) + checkedKey) % 26;
             printf("%c",c + 63);
+        } else {
+            printf("%c",ASCII);
         }
     }
     printf("\n");
