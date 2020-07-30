@@ -69,7 +69,8 @@ bool vote(string name)
     bool result = false;
     for (int i = 0; i < candidate_count; i++)
     {
-        if (strcmp(candidates[i].name, name) == 0) {
+        if (strcmp(candidates[i].name, name) == 0)
+        {
             candidates[i].votes = candidates[i].votes + 1;
             result = true;
         }
@@ -84,14 +85,16 @@ void print_winner(void)
     int biggest = 0;
     for (int i = 1; i < candidate_count; i++)
     {
-        if (candidates[biggest].votes < candidates[i].votes) {
+        if (candidates[biggest].votes < candidates[i].votes)
+        {
             biggest = i;
         }
     }
     // Check if there is a tie, if not, get the winner then print
     for (int i = 0; i < candidate_count; i++)
     {
-        if (candidates[biggest].votes == candidates[i].votes) {
+        if (candidates[biggest].votes == candidates[i].votes)
+        {
             printf("%s\n", candidates[i].name);
         }
     }
