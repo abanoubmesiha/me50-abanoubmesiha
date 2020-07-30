@@ -80,7 +80,7 @@ bool vote(string name)
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    string result;
+    // Detect biggest number of votes
     int biggest = 0;
     for (int i = 1; i < candidate_count; i++)
     {
@@ -88,6 +88,12 @@ void print_winner(void)
             biggest = i;
         }
     }
-    printf("%s\n", candidates[biggest].name);
+    // Check if there is a tie, if not, get the winner then print
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[biggest].votes == candidates[i].votes) {
+            printf("%s\n", candidates[i].name);
+        }
+    }
 }
 
