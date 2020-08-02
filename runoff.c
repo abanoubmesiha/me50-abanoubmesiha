@@ -171,11 +171,12 @@ bool print_winner(void)
         {
             if (candidates[i].votes > (voter_count/2))
             {
-                printf("%sn", candidates[i].name);
+                printf("%s\n", candidates[i].name);
                 result = true;
                 break;
             }
         }
+                // printf("%d\n", result);
     return result;
 }
 
