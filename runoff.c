@@ -157,7 +157,6 @@ void tabulate(void)
             {
                 candidates[preferences[i][j]].votes = candidates[preferences[i][j]].votes +1;
                 break;
-                // printf("%s%i\n", candidates[preferences[i][1]].name, candidates[preferences[i][1]].votes);
             }
         }
     }
@@ -172,7 +171,7 @@ bool print_winner(void)
         {
             if (candidates[i].votes > (voter_count/2))
             {
-                printf("%s is winner by %i votes\n", candidates[i].name, candidates[i].votes);
+                printf("%sn", candidates[i].name);
                 result = true;
                 break;
             }
