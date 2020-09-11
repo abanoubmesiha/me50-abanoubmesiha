@@ -68,31 +68,36 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int w=0; w<width; w++)
         {
-            float firstRed = image[h][w].rgbtRed;
-            float firstGreen = image[h][w].rgbtGreen;
-            float firstBlue = image[h][w].rgbtBlue;
+            int first, second, temp;
+            // scanf("%i", &first);
+            // scanf("%i", &second);
+            first = image[h][w].rgbtRed;
+            second = image[h][width-1 -w].rgbtRed;
 
-            float secondRed = image[h][width-1 -w].rgbtRed;
-            float secondGreen = image[h][width-1 -w].rgbtGreen;
-            float secondBlue = image[h][width-1 -w].rgbtBlue;
+            temp = first;
 
-            int fRed = firstRed;
-            int fGreen = firstGreen;
-            int fBlue = firstBlue;
+            first = second;
 
-            int sRed = secondRed;
-            int sGreen = secondGreen;
-            int sBlue = secondBlue;
+            second = temp;
 
-            image[h][w].rgbtRed = sRed;
-            image[h][w].rgbtGreen = sGreen;
-            image[h][w].rgbtBlue = sBlue;
+            // int firstRed = image[h][w].rgbtRed;
+            // int firstGreen = image[h][w].rgbtGreen;
+            // int firstBlue = image[h][w].rgbtBlue;
 
-            image[h][width-1 -w].rgbtRed = fRed;
-            image[h][width-1 -w].rgbtGreen = fGreen;
-            image[h][width-1 -w].rgbtBlue = fBlue;
+            // int secondRed = image[h][width-1 -w].rgbtRed;
+            // int secondGreen = image[h][width-1 -w].rgbtGreen;
+            // int secondBlue = image[h][width-1 -w].rgbtBlue;
+
+            // image[h][w].rgbtRed = secondRed;
+            // image[h][w].rgbtGreen = secondGreen;
+            // image[h][w].rgbtBlue = secondBlue;
+
+            // image[h][width-1 -w].rgbtRed = firstRed;
+            // image[h][width-1 -w].rgbtGreen = firstGreen;
+            // image[h][width-1 -w].rgbtBlue = firstBlue;
         }
     }
+
     return;
 }
 
