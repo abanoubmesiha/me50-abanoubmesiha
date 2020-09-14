@@ -1,6 +1,7 @@
 #include "helpers.h"
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
@@ -60,7 +61,12 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
     }
     return;
 }
-
+void swap(int *a, int *b)
+{
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
 // Reflect image horizontally
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
@@ -68,36 +74,27 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int w=0; w<width; w++)
         {
-            int first, second, temp;
-            // scanf("%i", &first);
-            // scanf("%i", &second);
-            first = image[h][w].rgbtRed;
-            second = image[h][width-1 -w].rgbtRed;
+            int firstRed = image[h][w].rgbtRed;
+            int firstGreen = image[h][w].rgbtGreen;
+            int firstBlue = image[h][w].rgbtBlue;
 
-            temp = first;
+            int lastRed = image[h][width-1 -w].rgbtRed;
+            int lastGreen = image[h][width-1 -w].rgbtGreen;
+            int lastBlue = image[h][width-1 -w].rgbtBlue;
 
-            first = second;
+            swap(&firstRed, &lastRed);
+            swap(&firstGreen, &lastGreen);
+            swap(&firstBlue, &lastBlue);
 
-            second = temp;
+            image[h][w].rgbtRed = firstRed;
+            image[h][w].rgbtGreen = firstGreen;
+            image[h][w].rgbtBlue = firstBlue;
 
-            // int firstRed = image[h][w].rgbtRed;
-            // int firstGreen = image[h][w].rgbtGreen;
-            // int firstBlue = image[h][w].rgbtBlue;
-
-            // int secondRed = image[h][width-1 -w].rgbtRed;
-            // int secondGreen = image[h][width-1 -w].rgbtGreen;
-            // int secondBlue = image[h][width-1 -w].rgbtBlue;
-
-            // image[h][w].rgbtRed = secondRed;
-            // image[h][w].rgbtGreen = secondGreen;
-            // image[h][w].rgbtBlue = secondBlue;
-
-            // image[h][width-1 -w].rgbtRed = firstRed;
-            // image[h][width-1 -w].rgbtGreen = firstGreen;
-            // image[h][width-1 -w].rgbtBlue = firstBlue;
+            image[h][width-1 -w].rgbtRed = lastRed;
+            image[h][width-1 -w].rgbtGreen = lastGreen;
+            image[h][width-1 -w].rgbtBlue = lastBlue;
         }
     }
-
     return;
 }
 
