@@ -84,9 +84,9 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 
             // printf("%i,%i,%i,%i,%i,%i", firstRed, firstGreen, firstBlue, lastRed, lastGreen, lastBlue);
 
-    for (int h=0; h<height; h++)
+    for (int h=0; h<1; h++)
     {
-        for (int w=0; w<width; w++)
+        for (int w=0; w<width/2; w++) // To make sure you swap only once.
         {
             int firstRed = image[h][w].rgbtRed;
             int firstGreen = image[h][w].rgbtGreen;
