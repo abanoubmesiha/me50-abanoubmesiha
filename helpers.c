@@ -100,13 +100,13 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
             swap(&firstGreen, &lastGreen);
             swap(&firstBlue, &lastBlue);
 
-            image[h][width-1 -w].rgbtRed = firstRed;
-            image[h][width-1 -w].rgbtGreen = firstGreen;
-            image[h][width-1 -w].rgbtBlue = firstBlue;
+            image[h][w].rgbtRed = firstRed;
+            image[h][w].rgbtGreen = firstGreen;
+            image[h][w].rgbtBlue = firstBlue;
 
-            image[h][w].rgbtRed = lastRed;
-            image[h][w].rgbtGreen = lastGreen;
-            image[h][w].rgbtBlue = lastBlue;
+            image[h][width-1 -w].rgbtRed = lastRed;
+            image[h][width-1 -w].rgbtGreen = lastGreen;
+            image[h][width-1 -w].rgbtBlue = lastBlue;
         }
     }
     return;
