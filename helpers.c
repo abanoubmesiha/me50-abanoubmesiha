@@ -70,23 +70,9 @@ void swap(int *a, int *b)
 // Reflect image horizontally
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
-            // int firstRed = 10;
-            // int firstGreen = 20;
-            // int firstBlue = 30;
-
-            // int lastRed = 40;
-            // int lastGreen = 50;
-            // int lastBlue = 60;
-
-            // swap(&firstRed, &lastRed);
-            // swap(&firstGreen, &lastGreen);
-            // swap(&firstBlue, &lastBlue);
-
-            // printf("%i,%i,%i,%i,%i,%i", firstRed, firstGreen, firstBlue, lastRed, lastGreen, lastBlue);
-
-    for (int h=0; h<1; h++)
+    for (int h=0; h<height; h++)
     {
-        for (int w=0; w<width/2; w++) // To make sure you swap only once.
+        for (int w=0; w<width/2; w++) // (width/2) To make sure you swap only once.
         {
             int firstRed = image[h][w].rgbtRed;
             int firstGreen = image[h][w].rgbtGreen;
