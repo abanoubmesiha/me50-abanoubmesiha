@@ -136,9 +136,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         for (int w=0; w<width-1; w++)
         {
             // printf("Before: %i - ", image[h][w].rgbtRed);
-            image[h][w].rgbtRed = (img[h-1][w-1].red + img[h-1][w].red + img[h-1][w+1].red + img[h][w-1].red + img[h][w + 1].red + img[h+1][w-1].red + img[h+1][w].red + img[h-1][w+1].red) / 9;
-            image[h][w].rgbtGreen = (img[h-1][w-1].green + img[h-1][w].green + img[h-1][w+1].green + img[h][w-1].green + img[h][w + 1].green + img[h+1][w-1].green + img[h+1][w].green + img[h-1][w+1].green) / 9;
-            image[h][w].rgbtBlue = (img[h-1][w-1].blue + img[h-1][w].blue + img[h-1][w+1].blue + img[h][w-1].blue + img[h][w + 1].blue + img[h+1][w-1].blue + img[h+1][w].blue + img[h-1][w+1].blue) / 9;
+            image[h][w].rgbtRed = (img[h-1][w-1].red + img[h-1][w].red + img[h-1][w+1].red + img[h][w-1].red + img[h][w].red + img[h+1][w+1].red + img[h+1][w-1].red + img[h+1][w].red+ img[h+1][w+1].red) / 9;
+            image[h][w].rgbtGreen = (img[h-1][w-1].green + img[h-1][w].green + img[h-1][w+1].green + img[h][w-1].green + img[h][w].green + img[h][w+1].green + img[h+1][w-1].green + img[h+1][w].green + img[h+1][w+1].green) / 9;
+            image[h][w].rgbtBlue = (img[h-1][w-1].blue + img[h-1][w].blue + img[h-1][w+1].blue + img[h][w-1].blue + img[h][w].blue + img[h][w+1].blue + img[h+1][w-1].blue + img[h-1][w].blue + img[h-1][w+1].blue) / 9;
             // printf("After: %i\n", image[h][w].rgbtRed);
         }
     }
