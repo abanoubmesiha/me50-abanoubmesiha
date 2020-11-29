@@ -131,9 +131,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         }
     }
     // blur the original image.
-    for (int h=1; h<height-1; h++)
+    for (int h=0; h<height-1; h++)
     {
-        for (int w=1; w<width-1; w++)
+        for (int w=0; w<width-1; w++)
         {
             // printf("Before: %i - ", image[h][w].rgbtRed);
             image[h][w].rgbtRed = (img[h-1][w-1].red + img[h-1][w].red + img[h-1][w+1].red + img[h][w-1].red + img[h][w + 1].red + img[h+1][w-1].red + img[h+1][w].red + img[h-1][w+1].red) / 9;
