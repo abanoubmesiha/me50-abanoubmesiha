@@ -119,228 +119,96 @@ void blurPixel(int h, int w, int height, int width, struct pixel img[height][wid
 }
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
-     RGBTRIPLE imgCopy[height][width];
-	float avgRed;
-	float avgGreen;
-	float avgBlue;
-
-	//create a copy of original image to save original pixel values
+    RGBTRIPLE copy[height][width];
+	float vRed;
+	float vGreen;
+	float vBlue;
+	//create a copy of original image
 	for (int row = 0; row < height; row++)
 	{
 		for (int w = 0; w < width; w++)
 		{
-			imgCopy[row][w].rgbtRed = image[row][w].rgbtRed;
-			imgCopy[row][w].rgbtGreen = image[row][w].rgbtGreen;
-			imgCopy[row][w].rgbtBlue = image[row][w].rgbtBlue;
-
-
+			copy[row][w].rgbtRed = image[row][w].rgbtRed;
+			copy[row][w].rgbtGreen = image[row][w].rgbtGreen;
+			copy[row][w].rgbtBlue = image[row][w].rgbtBlue;
 		}
 	}
-
-	for (int h = 0; h < height; h++)
+	int h;
+	int w;
+	for (h = 0; h < height; h++)
 	{
-		for (int w = 0; w < width; w++)
+		for (w = 0; w < width; w++)
 		{
-			//if the pixel is on the top left edge
+			//if the pixel is on the top left corner
 			if (w == 0 && h == 0)
 			{
-				avgRed = (float)(imgCopy[h][w].rgbtRed + imgCopy[h][w+1].rgbtRed + imgCopy[h+1][w].rgbtRed + imgCopy[h+1][w+1].rgbtRed) / 4;
-
-				avgGreen = (float)(imgCopy[h][w].rgbtGreen + imgCopy[h][w+1].rgbtGreen + imgCopy[h+1][w].rgbtGreen + imgCopy[h+1][w+1].rgbtGreen) / 4;
-
-				avgBlue = (float)(imgCopy[h][w].rgbtBlue + imgCopy[h][w+1].rgbtBlue + imgCopy[h+1][w].rgbtBlue + imgCopy[h+1][w+1].rgbtBlue) / 4;
-				avgRed = round(avgRed);
-				avgBlue = round(avgBlue);
-				avgGreen = round(avgGreen);
-
-				image[h][w].rgbtRed = avgRed;
-				image[h][w].rgbtGreen = avgGreen;
-				image[h][w].rgbtBlue = avgBlue;
+				vRed = (float)(copy[h][w].rgbtRed + copy[h][w+1].rgbtRed + copy[h+1][w].rgbtRed + copy[h+1][w+1].rgbtRed) / 4;
+				vGreen = (float)(copy[h][w].rgbtGreen + copy[h][w+1].rgbtGreen + copy[h+1][w].rgbtGreen + copy[h+1][w+1].rgbtGreen) / 4;
+				vBlue = (float)(copy[h][w].rgbtBlue + copy[h][w+1].rgbtBlue + copy[h+1][w].rgbtBlue + copy[h+1][w+1].rgbtBlue) / 4;
 			}
-
-			//if the pixel is on the lower left edge
+			//if the pixel is on the lower left corner
 			else if (w == 0 && h == (height - 1))
 			{
-				avgRed =(float)(imgCopy[h-1][w].rgbtRed + imgCopy[h-1][w+1].rgbtRed + imgCopy[h][w].rgbtRed + imgCopy[h][w+1].rgbtRed) / 4;
-
-				avgGreen = (float)(imgCopy[h-1][w].rgbtGreen + imgCopy[h-1][w+1].rgbtGreen + imgCopy[h][w].rgbtGreen + imgCopy[h][w+1].rgbtGreen) / 4;
-
-				avgBlue = (float)(imgCopy[h-1][w].rgbtBlue + imgCopy[h-1][w+1].rgbtBlue + imgCopy[h][w].rgbtBlue + imgCopy[h][w+1].rgbtBlue) / 4;
-				avgRed = round(avgRed);
-				avgGreen = round(avgGreen);
-				avgBlue = round(avgBlue);
-
-				image[h][w].rgbtRed = avgRed;
-				image[h][w].rgbtGreen = avgGreen;
-                                image[h][w].rgbtBlue = avgBlue;
+				vRed =(float)(copy[h-1][w].rgbtRed + copy[h-1][w+1].rgbtRed + copy[h][w].rgbtRed + copy[h][w+1].rgbtRed) / 4;
+				vGreen = (float)(copy[h-1][w].rgbtGreen + copy[h-1][w+1].rgbtGreen + copy[h][w].rgbtGreen + copy[h][w+1].rgbtGreen) / 4;
+				vBlue = (float)(copy[h-1][w].rgbtBlue + copy[h-1][w+1].rgbtBlue + copy[h][w].rgbtBlue + copy[h][w+1].rgbtBlue) / 4;
 			}
-
-			//if the pixel is on top Right
+			//if the pixel is on top Right corner
 			else if (h == 0 && w == (width - 1))
 			{
-				avgRed = (float)(imgCopy[h][w-1].rgbtRed + imgCopy[h][w].rgbtRed + imgCopy[h+1][w-1].rgbtRed + imgCopy[h+1][w].rgbtRed)/ 4;
-
-				avgGreen = (float)(imgCopy[h][w-1].rgbtGreen + imgCopy[h][w].rgbtGreen + imgCopy[h+1][w-1].rgbtGreen + imgCopy[h+1][w].rgbtGreen) / 4;
-
-				avgBlue = (float)(imgCopy[h][w-1].rgbtBlue + imgCopy[h][w].rgbtBlue + imgCopy[h+1][w-1].rgbtBlue + imgCopy[h+1][w].rgbtBlue) / 4;
-
-				avgRed = round(avgRed);
-				avgGreen = round(avgGreen);
-				avgBlue = round(avgBlue);
-
-				image[h][w].rgbtRed = avgRed;
-				image[h][w].rgbtGreen = avgGreen;
-                image[h][w].rgbtBlue = avgBlue;
+				vRed = (float)(copy[h][w-1].rgbtRed + copy[h][w].rgbtRed + copy[h+1][w-1].rgbtRed + copy[h+1][w].rgbtRed)/ 4;
+				vGreen = (float)(copy[h][w-1].rgbtGreen + copy[h][w].rgbtGreen + copy[h+1][w-1].rgbtGreen + copy[h+1][w].rgbtGreen) / 4;
+				vBlue = (float)(copy[h][w-1].rgbtBlue + copy[h][w].rgbtBlue + copy[h+1][w-1].rgbtBlue + copy[h+1][w].rgbtBlue) / 4;
 			}
-
-			//if the pixel is on lower right
+			//if the pixel is on lower right corner
 			else if(h == (height - 1) && w == (width - 1))
 			{
-				avgRed = (float)(imgCopy[h-1][w-1].rgbtRed + imgCopy[h-1][w].rgbtRed + imgCopy[h][w-1].rgbtRed + imgCopy[h][w].rgbtRed) / 4;
-
-		 		avgBlue = (float)(imgCopy[h-1][w-1].rgbtBlue + imgCopy[h-1][w].rgbtBlue + imgCopy[h][w-1].rgbtBlue + imgCopy[h][w].rgbtBlue) / 4;
-
-				avgGreen = (float)(imgCopy[h-1][w-1].rgbtGreen + imgCopy[h-1][w].rgbtGreen + imgCopy[h][w-1].rgbtGreen + imgCopy[h][w].rgbtGreen) / 4;
-
-				avgRed = round(avgRed);
-				avgGreen = round(avgGreen);
-				avgBlue = round(avgBlue);
-
-				image[h][w].rgbtRed = avgRed;
-				image[h][w].rgbtGreen = avgGreen;
-                image[h][w].rgbtBlue = avgBlue;
+				vRed = (float)(copy[h-1][w-1].rgbtRed + copy[h-1][w].rgbtRed + copy[h][w-1].rgbtRed + copy[h][w].rgbtRed) / 4;
+		 		vBlue = (float)(copy[h-1][w-1].rgbtBlue + copy[h-1][w].rgbtBlue + copy[h][w-1].rgbtBlue + copy[h][w].rgbtBlue) / 4;
+				vGreen = (float)(copy[h-1][w-1].rgbtGreen + copy[h-1][w].rgbtGreen + copy[h][w-1].rgbtGreen + copy[h][w].rgbtGreen) / 4;
 			}
        //if the pixel is on left side
-
 			else if (w == 0 && (h > 0 && h < height - 1))
 			{
-				avgRed = (float)(imgCopy[h-1][w].rgbtRed + imgCopy[h-1][w+1].rgbtRed + imgCopy[h][w].rgbtRed + imgCopy[h][w+1].rgbtRed + imgCopy[h+1][w].rgbtRed + imgCopy[h+1][w+1].rgbtRed) / 6;
-
-				avgGreen = (float)(imgCopy[h-1][w].rgbtGreen + imgCopy[h-1][w+1].rgbtGreen + imgCopy[h][w].rgbtGreen + imgCopy[h][w+1].rgbtGreen + imgCopy[h+1][w].rgbtGreen + imgCopy[h+1][w+1].rgbtGreen) / 6;
-
-				avgBlue = (float)(imgCopy[h-1][w].rgbtBlue + imgCopy[h-1][w+1].rgbtBlue + imgCopy[h][w].rgbtBlue + imgCopy[h][w+1].rgbtBlue + imgCopy[h+1][w].rgbtBlue + imgCopy[h+1][w+1].rgbtBlue) / 6;
-
-				avgRed = round(avgRed);
-				avgGreen = round(avgGreen);
-				avgBlue = round(avgBlue);
-
-				image[h][w].rgbtRed = avgRed;
-				image[h][w].rgbtGreen = avgGreen;
-				image[h][w].rgbtBlue = avgBlue;
+				vRed = (float)(copy[h-1][w].rgbtRed + copy[h-1][w+1].rgbtRed + copy[h][w].rgbtRed + copy[h][w+1].rgbtRed + copy[h+1][w].rgbtRed + copy[h+1][w+1].rgbtRed) / 6;
+				vGreen = (float)(copy[h-1][w].rgbtGreen + copy[h-1][w+1].rgbtGreen + copy[h][w].rgbtGreen + copy[h][w+1].rgbtGreen + copy[h+1][w].rgbtGreen + copy[h+1][w+1].rgbtGreen) / 6;
+				vBlue = (float)(copy[h-1][w].rgbtBlue + copy[h-1][w+1].rgbtBlue + copy[h][w].rgbtBlue + copy[h][w+1].rgbtBlue + copy[h+1][w].rgbtBlue + copy[h+1][w+1].rgbtBlue) / 6;
 			}
       //if the pixel is on right side
 			else if (w == (width - 1) && (h > 0 && h < height - 1))
 			{
-				avgRed = (float)(imgCopy[h-1][w-1].rgbtRed + imgCopy[h-1][w].rgbtRed + imgCopy[h][w-1].rgbtRed + imgCopy[h][w].rgbtRed + imgCopy[h+1][w-1].rgbtRed + imgCopy[h+1][w].rgbtRed) / 6;
-
-				avgGreen = (float)(imgCopy[h-1][w-1].rgbtGreen + imgCopy[h-1][w].rgbtGreen + imgCopy[h][w-1].rgbtGreen + imgCopy[h][w].rgbtGreen + imgCopy[h+1][w-1].rgbtGreen + imgCopy[h+1][w].rgbtGreen) / 6;
-
-				avgBlue = (float)(imgCopy[h-1][w-1].rgbtBlue + imgCopy[h-1][w].rgbtBlue + imgCopy[h][w-1].rgbtBlue + imgCopy[h][w].rgbtBlue + imgCopy[h+1][w-1].rgbtBlue + imgCopy[h+1][w].rgbtBlue) / 6;
-
-				avgRed = round(avgRed);
-				avgGreen = round(avgGreen);
-				avgBlue = round(avgBlue);
-
-				image[h][w].rgbtRed = avgRed;
-                                image[h][w].rgbtGreen = avgGreen;
-				image[h][w].rgbtBlue = avgBlue;
+				vRed = (float)(copy[h-1][w-1].rgbtRed + copy[h-1][w].rgbtRed + copy[h][w-1].rgbtRed + copy[h][w].rgbtRed + copy[h+1][w-1].rgbtRed + copy[h+1][w].rgbtRed) / 6;
+				vGreen = (float)(copy[h-1][w-1].rgbtGreen + copy[h-1][w].rgbtGreen + copy[h][w-1].rgbtGreen + copy[h][w].rgbtGreen + copy[h+1][w-1].rgbtGreen + copy[h+1][w].rgbtGreen) / 6;
+				vBlue = (float)(copy[h-1][w-1].rgbtBlue + copy[h-1][w].rgbtBlue + copy[h][w-1].rgbtBlue + copy[h][w].rgbtBlue + copy[h+1][w-1].rgbtBlue + copy[h+1][w].rgbtBlue) / 6;
 			}
        //if the pixel is on upper side
 			else if (h == 0 && (w > 0 &&  w < width - 1))
 			{
-				avgRed = (float)(imgCopy[h][w-1].rgbtRed + imgCopy[h][w].rgbtRed + imgCopy[h][w+1].rgbtRed + imgCopy[h+1][w-1].rgbtRed + imgCopy[h+1][w].rgbtRed + imgCopy[h+1][w+1].rgbtRed) / 6;
-
-				avgGreen = (float)(imgCopy[h][w-1].rgbtGreen + imgCopy[h][w].rgbtGreen + imgCopy[h][w+1].rgbtGreen + imgCopy[h+1][w-1].rgbtGreen + imgCopy[h+1][w].rgbtGreen + imgCopy[h+1][w+1].rgbtGreen) / 6;
-
-				avgBlue = (float)(imgCopy[h][w-1].rgbtBlue + imgCopy[h][w].rgbtBlue + imgCopy[h][w+1].rgbtBlue + imgCopy[h+1][w-1].rgbtBlue + imgCopy[h+1][w].rgbtBlue + imgCopy[h+1][w+1].rgbtBlue) / 6;
-
-				avgRed = round(avgRed);
-				avgGreen = round(avgGreen);
-				avgBlue = round(avgBlue);
-
-				image[h][w].rgbtRed = avgRed;
-				image[h][w].rgbtGreen = avgGreen;
-				image[h][w].rgbtBlue = avgBlue;
+				vRed = (float)(copy[h][w-1].rgbtRed + copy[h][w].rgbtRed + copy[h][w+1].rgbtRed + copy[h+1][w-1].rgbtRed + copy[h+1][w].rgbtRed + copy[h+1][w+1].rgbtRed) / 6;
+				vGreen = (float)(copy[h][w-1].rgbtGreen + copy[h][w].rgbtGreen + copy[h][w+1].rgbtGreen + copy[h+1][w-1].rgbtGreen + copy[h+1][w].rgbtGreen + copy[h+1][w+1].rgbtGreen) / 6;
+				vBlue = (float)(copy[h][w-1].rgbtBlue + copy[h][w].rgbtBlue + copy[h][w+1].rgbtBlue + copy[h+1][w-1].rgbtBlue + copy[h+1][w].rgbtBlue + copy[h+1][w+1].rgbtBlue) / 6;
 			}
        //if the pixel is on lower side
 			else if  (h == height - 1 && (w > 0 && w < width - 1))
 			{
-				avgRed = (float)(imgCopy[h-1][w-1].rgbtRed + imgCopy[h-1][w].rgbtRed + imgCopy[h-1][w+1].rgbtRed + imgCopy[h][w-1].rgbtRed + imgCopy[h][w].rgbtRed + imgCopy[h][w+1].rgbtRed) / 6;
-
-				avgGreen = (float)(imgCopy[h-1][w-1].rgbtGreen + imgCopy[h-1][w].rgbtGreen + imgCopy[h-1][w+1].rgbtGreen + imgCopy[h][w-1].rgbtGreen + imgCopy[h][w].rgbtGreen + imgCopy[h][w+1].rgbtGreen) / 6;
-				avgBlue = (float)(imgCopy[h-1][w-1].rgbtBlue + imgCopy[h-1][w].rgbtBlue + imgCopy[h-1][w+1].rgbtBlue + imgCopy[h][w-1].rgbtBlue + imgCopy[h][w].rgbtBlue + imgCopy[h][w+1].rgbtBlue) / 6;
-
-				avgRed = round(avgRed);
-				avgGreen = round(avgGreen);
-				avgBlue = round(avgBlue);
-
-				image[h][w].rgbtRed = avgRed;
-				image[h][w].rgbtGreen = avgGreen;
-				image[h][w].rgbtBlue = avgBlue;
+				vRed = (float)(copy[h-1][w-1].rgbtRed + copy[h-1][w].rgbtRed + copy[h-1][w+1].rgbtRed + copy[h][w-1].rgbtRed + copy[h][w].rgbtRed + copy[h][w+1].rgbtRed) / 6;
+				vGreen = (float)(copy[h-1][w-1].rgbtGreen + copy[h-1][w].rgbtGreen + copy[h-1][w+1].rgbtGreen + copy[h][w-1].rgbtGreen + copy[h][w].rgbtGreen + copy[h][w+1].rgbtGreen) / 6;
+				vBlue = (float)(copy[h-1][w-1].rgbtBlue + copy[h-1][w].rgbtBlue + copy[h-1][w+1].rgbtBlue + copy[h][w-1].rgbtBlue + copy[h][w].rgbtBlue + copy[h][w+1].rgbtBlue) / 6;
 			}
       //if the pixel is on the middle and can form a 3x3 grid
 			else
 			{
-				avgRed = (float)(imgCopy[h-1][w-1].rgbtRed + imgCopy[h-1][w].rgbtRed + imgCopy[h-1][w+1].rgbtRed + imgCopy[h][w-1].rgbtRed + imgCopy[h][w].rgbtRed + imgCopy[h][w+1].rgbtRed + imgCopy[h+1][w-1].rgbtRed + imgCopy[h+1][w].rgbtRed + imgCopy[h+1][w+1].rgbtRed) / 9;
-				avgGreen = (float)(imgCopy[h-1][w-1].rgbtGreen + imgCopy[h-1][w].rgbtGreen + imgCopy[h-1][w+1].rgbtGreen + imgCopy[h][w-1].rgbtGreen + imgCopy[h][w].rgbtGreen + imgCopy[h][w+1].rgbtGreen + imgCopy[h+1][w-1].rgbtGreen + imgCopy[h+1][w].rgbtGreen + imgCopy[h+1][w+1].rgbtGreen) / 9;
-
-				avgBlue = (float)(imgCopy[h-1][w-1].rgbtBlue + imgCopy[h-1][w].rgbtBlue + imgCopy[h-1][w+1].rgbtBlue + imgCopy[h][w-1].rgbtBlue + imgCopy[h][w].rgbtBlue + imgCopy[h][w+1].rgbtBlue + imgCopy[h+1][w-1].rgbtBlue + imgCopy[h+1][w].rgbtBlue + imgCopy[h+1][w+1].rgbtBlue) / 9;
-
-				avgRed = round(avgRed);
-				avgGreen = round(avgGreen);
-				avgBlue = round(avgBlue);
-
-				image[h][w].rgbtRed = avgRed;
-				image[h][w].rgbtGreen = avgGreen;
-				image[h][w].rgbtBlue = avgBlue;
+				vRed = (float)(copy[h-1][w-1].rgbtRed + copy[h-1][w].rgbtRed + copy[h-1][w+1].rgbtRed + copy[h][w-1].rgbtRed + copy[h][w].rgbtRed + copy[h][w+1].rgbtRed + copy[h+1][w-1].rgbtRed + copy[h+1][w].rgbtRed + copy[h+1][w+1].rgbtRed) / 9;
+				vGreen = (float)(copy[h-1][w-1].rgbtGreen + copy[h-1][w].rgbtGreen + copy[h-1][w+1].rgbtGreen + copy[h][w-1].rgbtGreen + copy[h][w].rgbtGreen + copy[h][w+1].rgbtGreen + copy[h+1][w-1].rgbtGreen + copy[h+1][w].rgbtGreen + copy[h+1][w+1].rgbtGreen) / 9;
+				vBlue = (float)(copy[h-1][w-1].rgbtBlue + copy[h-1][w].rgbtBlue + copy[h-1][w+1].rgbtBlue + copy[h][w-1].rgbtBlue + copy[h][w].rgbtBlue + copy[h][w+1].rgbtBlue + copy[h+1][w-1].rgbtBlue + copy[h+1][w].rgbtBlue + copy[h+1][w+1].rgbtBlue) / 9;
 			}
-
 		}
+				vRed = round(vRed);
+				vGreen = round(vGreen);
+				vBlue = round(vBlue);
+				image[h][w].rgbtRed = vRed;
+				image[h][w].rgbtGreen = vGreen;
+				image[h][w].rgbtBlue = vBlue;
 	}
     return;
-    // RGBTRIPLE tem[height][width];
-
-    // for (int i = 0; i<height; i++)
-    // {
-    //     for (int j=0; j<width; j++)
-    //     {
-    //         int sumB = 0;
-    //         int sumR = 0;
-    //         int sumG = 0;
-    //         float counter = 0.00;
-
-    //         for (int k = -1; k<2; k++)
-    //         {
-    //             for (int h = -1; h<2; h++)
-    //             {
-    //                 if ((i + k < 0) || (i + k > height -1) || (j + h < 0) || (j + h > width -1))
-    //                 {
-    //                     continue;
-    //                 }
-    //                 sumB += image[i+k][j+h].rgbtBlue;
-    //                 sumR += image[i+k][j+h].rgbtGreen;
-    //                 sumG += image[i+k][j+h].rgbtRed;
-
-    //                 counter++;
-
-    //             }
-    //         }
-    //         tem[i][j].rgbtBlue = round(sumB/counter);
-    //         tem[i][j].rgbtRed = round(sumR/counter);
-    //         tem[i][j].rgbtGreen = round(sumG/counter);
-    //     }
-    // }
-
-    // for (int i=0; i<height;i++)
-    // {
-    //     for (int j=0; j<width;j++)
-    //     {
-    //         image[i][j].rgbtBlue = tem[i][j].rgbtBlue;
-    //         image[i][j].rgbtRed = tem[i][j].rgbtRed;
-    //         image[i][j].rgbtGreen = tem[i][j].rgbtGreen;
-    //     }
-
-    // }
-
-    // return;
 }
