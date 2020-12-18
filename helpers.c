@@ -133,11 +133,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 			copy[row][w].rgbtBlue = image[row][w].rgbtBlue;
 		}
 	}
-	int h;
-	int w;
-	for (h = 0; h < height; h++)
+	for (int h = 0; h < height; h++)
 	{
-		for (w = 0; w < width; w++)
+		for (int w = 0; w < width; w++)
 		{
 			//if the pixel is on the top left corner
 			if (w == 0 && h == 0)
@@ -202,13 +200,13 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 				vGreen = (float)(copy[h-1][w-1].rgbtGreen + copy[h-1][w].rgbtGreen + copy[h-1][w+1].rgbtGreen + copy[h][w-1].rgbtGreen + copy[h][w].rgbtGreen + copy[h][w+1].rgbtGreen + copy[h+1][w-1].rgbtGreen + copy[h+1][w].rgbtGreen + copy[h+1][w+1].rgbtGreen) / 9;
 				vBlue = (float)(copy[h-1][w-1].rgbtBlue + copy[h-1][w].rgbtBlue + copy[h-1][w+1].rgbtBlue + copy[h][w-1].rgbtBlue + copy[h][w].rgbtBlue + copy[h][w+1].rgbtBlue + copy[h+1][w-1].rgbtBlue + copy[h+1][w].rgbtBlue + copy[h+1][w+1].rgbtBlue) / 9;
 			}
-		}
 				vRed = round(vRed);
 				vGreen = round(vGreen);
 				vBlue = round(vBlue);
 				image[h][w].rgbtRed = vRed;
 				image[h][w].rgbtGreen = vGreen;
 				image[h][w].rgbtBlue = vBlue;
+		}
 	}
     return;
 }
