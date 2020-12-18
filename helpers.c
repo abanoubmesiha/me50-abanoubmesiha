@@ -119,28 +119,49 @@ void blurPixel(int h, int w, int height, int width, struct pixel img[height][wid
 }
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
-    // copy the orinial image.
-    struct pixel img[height][width];
-    for (int h=0; h<height; h++)
+    RGBTRIPLE tem[height][width];
+
+    for (int i = 0; i<height; i++)
     {
-        for (int w=0; w<width; w++)
+        for (int j=0; j<width; j++)
         {
-            img[h][w].red = image[h][w].rgbtRed;
-            img[h][w].green = image[h][w].rgbtGreen;
-            img[h][w].blue = image[h][w].rgbtBlue;
+            int sumB = 0;
+            int sumR = 0;
+            int sumG = 0;
+            float counter = 0.00;
+
+            for (int k = -1; k<2; k++)
+            {
+                for (int h = -1; h<2; h++)
+                {
+                    if (i + k < 0 || i + k > height -1 || j + h < 0 || j + k > width -1)
+                    {
+                        continue;
+                    }
+                sumB += image[i+k][j+h].rgbtBlue;
+                sumR += image[i+k][j+h].rgbtGreen;
+                sumG += image[i+k][j+h].rgbtRed;
+
+                counter++;
+
+                }
+            }
+        tem[i][j].rgbtBlue = round(sumB/counter);
+        tem[i][j].rgbtRed = round(sumR/counter);
+        tem[i][j].rgbtGreen = round(sumG/counter);
         }
     }
-    // blur the original image.
-    for (int h=0; h<height-1; h++)
+
+    for (int i=0; i<height;i++)
     {
-        for (int w=0; w<width-1; w++)
+        for (int j=0; j<width;j++)
         {
-            // printf("Before: %i - ", image[h][w].rgbtRed);
-            image[h][w].rgbtRed = (img[h-1][w-1].red + img[h-1][w].red + img[h-1][w+1].red + img[h][w-1].red + img[h][w].red + img[h][w+1].red + img[h+1][w-1].red + img[h+1][w].red+ img[h+1][w+1].red) / 9;
-            image[h][w].rgbtGreen = (img[h-1][w-1].green + img[h-1][w].green + img[h-1][w+1].green + img[h][w-1].green + img[h][w].green + img[h][w+1].green + img[h+1][w-1].green + img[h+1][w].green + img[h+1][w+1].green) / 9;
-            image[h][w].rgbtBlue = (img[h-1][w-1].blue + img[h-1][w].blue + img[h-1][w+1].blue + img[h][w-1].blue + img[h][w].blue + img[h][w+1].blue + img[h+1][w-1].blue + img[h+1][w].blue + img[h+1][w+1].blue) / 9;
-            // printf("After: %i\n", image[h][w].rgbtRed);
+            image[i][j].rgbtBlue = tem[i][j].rgbtBlue;
+            image[i][j].rgbtRed = tem[i][j].rgbtRed;
+            image[i][j].rgbtGreen = tem[i][j].rgbtGreen;
         }
+
     }
+
     return;
 }
