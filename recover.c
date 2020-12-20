@@ -36,6 +36,7 @@ int main(void)
             {
                 // We found the start of a new pic so close out current picture
                 fclose(picture);
+                return 1;
             }
             else
             {
@@ -61,6 +62,6 @@ int main(void)
     fclose(input);
     fclose(picture);
 
-    return 1;
+    return 0;
     }
 }
