@@ -13,8 +13,6 @@ int main(void)
         printf("Could not open card.raw.\n");
         return 1;
     }
-    else
-    {
     // create buffer
     unsigned char buffer[BUFFER_SIZE];
 
@@ -36,7 +34,6 @@ int main(void)
             {
                 // We found the start of a new pic so close out current picture
                 fclose(picture);
-                return 1;
             }
             else
             {
@@ -54,6 +51,7 @@ int main(void)
         {
             // write 512 bytes to file once we start finding jpgs
             fwrite(&buffer, BUFFER_SIZE, 1, picture);
+            return 1;
         }
 
     }
@@ -63,5 +61,4 @@ int main(void)
     fclose(picture);
 
     return 0;
-    }
 }
