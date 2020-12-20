@@ -1,12 +1,3 @@
-/**
- * recover.c
- *
- * Computer Science 50
- * Problem Set 4
- *
- * Recovers JPEGs from a forensic image.
- */
-
 #include <cs50.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,7 +13,8 @@ int main(void)
         printf("Could not open card.raw.\n");
         return 1;
     }
-
+    else
+    {
     // create buffer
     unsigned char buffer[BUFFER_SIZE];
 
@@ -70,4 +62,5 @@ int main(void)
     fclose(picture);
 
     return 0;
+    }
 }
