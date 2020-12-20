@@ -32,7 +32,7 @@ int main(void)
     FILE* picture = NULL;
 
     // check if we've found a jpeg yet or not
-    int jpg_found = 1; //false
+    int jpg_found = 0; //false
 
     // go through cardfile until there aren't any blocks left
     while (fread(buffer, BUFFER_SIZE, 1, input) == 1)
@@ -40,7 +40,7 @@ int main(void)
         // read first 4 bytes of buffer and see if jpg signature using bitwise on last byte
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xe0) == 0xe0)
         {
-            if (jpg_found == 0)
+            if (jpg_found == 1)
             {
                 // We found the start of a new pic so close out current picture
                 fclose(picture);
