@@ -15,13 +15,11 @@
 
 int main(void)
 {
-    int returnNum = 0;
     // open memory card file
     FILE* input = fopen("card.raw", "r");
     if (input == NULL)
     {
         printf("Could not open card.raw.\n");
-        returnNum = 1;
         return 1;
     }
 
@@ -71,5 +69,5 @@ int main(void)
     fclose(input);
     fclose(picture);
 
-    return returnNum;
+    return 1;
 }
