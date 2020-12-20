@@ -69,5 +69,5 @@ int main(void)
     fclose(input);
     fclose(picture);
 
-    return 1;
+    return 0;
 }
