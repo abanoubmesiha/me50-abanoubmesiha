@@ -7,7 +7,7 @@
 int main(void)
 {
     // open memory card file
-    FILE* input = fopen("cardss.raw", "r");
+    FILE* input = fopen("card.raw", "r");
     if (input == NULL)
     {
         printf("Could not open card.raw.\n");
