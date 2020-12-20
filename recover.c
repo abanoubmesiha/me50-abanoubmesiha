@@ -13,6 +13,9 @@ int main(void)
         fprintf(stderr, "Could not open card.raw.\n");
         return 1;
     }
+    else
+    {
+
     // create buffer
     unsigned char buffer[BUFFER_SIZE];
 
@@ -60,4 +63,5 @@ int main(void)
     fclose(picture);
 
     return 0;
+    }
 }
