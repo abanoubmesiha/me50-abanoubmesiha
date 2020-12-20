@@ -10,7 +10,7 @@ int main(void)
     FILE* input = fopen("card.raw", "r");
     if (input == NULL)
     {
-        printf("Could not open card.raw.\n");
+        fprintf(stderr, "Could not open card.raw.\n");
         return 1;
     }
     // create buffer
@@ -51,7 +51,6 @@ int main(void)
         {
             // write 512 bytes to file once we start finding jpgs
             fwrite(&buffer, BUFFER_SIZE, 1, picture);
-            return 1;
         }
 
     }
