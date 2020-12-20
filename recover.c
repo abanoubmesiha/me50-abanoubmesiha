@@ -20,7 +20,7 @@ int main(void)
     if (input == NULL)
     {
         printf("Could not open card.raw.\n");
-        return 2;
+        return 1;
     }
 
     // create buffer
