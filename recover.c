@@ -4,18 +4,21 @@
 
 #define BUFFER_SIZE 512
 
-int main(void)
+int main(int argc, string argv[])
 {
-    // open memory card file
-    FILE* input = fopen("card.raw", "r");
-    if (input == NULL)
+    if (argc < 2)
     {
-        fprintf(stderr, "Could not open card.raw.\n");
+        printf("Please, type the name of the card\n");
         return 1;
     }
-    else
+    string card = argv[1];
+    // open memory card file
+    FILE* input = fopen(card, "r");
+    if (input == NULL)
     {
-
+        printf("Could not open card.raw.\n");
+        return 1;
+    }
     // create buffer
     unsigned char buffer[BUFFER_SIZE];
 
@@ -63,5 +66,4 @@ int main(void)
     fclose(picture);
 
     return 0;
-    }
 }
