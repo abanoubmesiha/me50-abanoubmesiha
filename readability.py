@@ -12,7 +12,7 @@ for char in text:
     if char in ['?', '.', '!']:
         sentences += 1
 
-wors += 1
+words += 1
 L = (letters * 100.0) / words
 S = (sentences * 100.0) / words
 result = int((0.0588 * L - 0.296 * S - 15.8) + 0.5)
