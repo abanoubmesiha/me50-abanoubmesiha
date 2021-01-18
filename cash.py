@@ -1,13 +1,15 @@
 from cs50 import get_float
 
+# Get the cash
 while True:
-    dollars = get_float("Change owed: ");
+    dollars = get_float("Change owed: ")
     if dollars >= 0:
         break
 
-cents = int( (dollars * 100) + 0.5)
+cents = int((dollars * 100) + 0.5)
 
 total = 0
+# Calculate the change
 for coin in [25, 10, 5, 1]:
     total += cents // coin
     cents %= coin
