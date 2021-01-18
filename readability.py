@@ -8,7 +8,7 @@ for char in text:
     if char.isalpha():
         letters += 1
     if char.isspace():
-        words: += 1
+        words += 1
     if char in ['?', '.', '!']:
         sentences += 1
 
