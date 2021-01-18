@@ -4,6 +4,7 @@ text = get_string("Text: ")
 
 letters = sentences = words = 0
 
+# Check chars
 for char in text:
     if char.isalpha():
         letters += 1
@@ -12,10 +13,12 @@ for char in text:
     if char in ['?', '.', '!']:
         sentences += 1
 
+# Calcualte words
 words += 1
 L = (letters * 100.0) / words
 S = (sentences * 100.0) / words
 result = int((0.0588 * L - 0.296 * S - 15.8) + 0.5)
+# Check the results
 if result < 1:
     print("Before Grade 1")
 elif result >= 16:
