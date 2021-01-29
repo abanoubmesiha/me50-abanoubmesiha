@@ -193,7 +193,7 @@ def register():
     if request.method == "POST":
         result_checks = is_provided("username") or is_provided("password") or is_provided("confirmation")
         if result_checks != None:
-            return result_checks
+            pass
         else:
             return apology("registration error", 403)
         try:
