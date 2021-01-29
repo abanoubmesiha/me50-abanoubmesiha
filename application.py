@@ -194,6 +194,8 @@ def register():
         result_checks = is_provided("username") or is_provided("password") or is_provided("confirmation")
         if result_checks != None:
             return result_checks
+        else:
+            return apology("registration error", 403)
         try:
             prim_key = db.execute("INSERT INTO users (username, hash) VALUES (:username, :hash)",
                 username=request.form.get("username"),
@@ -203,6 +205,7 @@ def register():
         if prim_key is None:
             return apology("registration error", 403)
         session["user_id"] = prim_key
+        return render_template("index.html")
     else:
         return render_template("register.html")
 
