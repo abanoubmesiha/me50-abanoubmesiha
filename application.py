@@ -201,7 +201,7 @@ def register():
                 username=request.form.get("username"),
                 hash=generate_password_hash(request.form.get("password")))
         except:
-            return apology("username already exists", 403)
+            return apology("username already exists", 400)
         if prim_key is None:
             return apology("registration error", 403)
         session["user_id"] = prim_key
