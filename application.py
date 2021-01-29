@@ -86,12 +86,12 @@ def buy():
         if find_missing_errors:
             return find_missing_errors
         elif not request.form.get("shares").isdigit():
-            return apology("invalid number of shares", 403)
+            return apology("invalid number of shares", 400)
         symbol = request.form.get("symbol").upper()
         shares = int(request.form.get("shares"))
         stock = lookup(symbol)
         if stock is None:
-            return apology("invalid symbol", 403)
+            return apology("invalid symbol", 400)
         rows = db.execute("SELECT cash FROM users WHERE id=:id", id=session["user_id"])
         cash = rows[0]["cash"]
         updated_cash = cash - shares * stock["price"]
