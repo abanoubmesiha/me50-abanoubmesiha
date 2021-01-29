@@ -122,7 +122,7 @@ def history():
     return render_template("history.html", transactions=transactions)
 def is_provided(field):
     if not request.form.get(field):
-        return apology(f"must provide {field}", 403)
+        return apology(f"must provide {field}", 400)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
