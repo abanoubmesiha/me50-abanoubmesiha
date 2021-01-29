@@ -233,7 +233,7 @@ def sell():
         for row in rows:
             if row["symbol"] == symbol:
                 if shares > row["totalShares"]:
-                    apology("You can't sell more than what you have.")
+                    apology("You can't sell more than what you have.", 400)
 
         rows = db.execute("SELECT cash FROM users WHERE id=:id", id=session["user_id"])
         cash = rows[0]["cash"]
