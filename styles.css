@@ -8,6 +8,14 @@
   border-bottom-left-radius: 30px;
 }
 
+.input-group.round-borders:hover input {
+  box-shadow: 5px 0px 15px -5px rgba(0,0,0,0.15);
+}
+
+.input-group.round-borders:hover .input-group-text {
+  box-shadow: -5px 0px 15px -5px rgba(0,0,0,0.15);
+}
+
 .fa.fa-search {
   color: #9aa0a6;
 }
