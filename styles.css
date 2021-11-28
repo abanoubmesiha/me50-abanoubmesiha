@@ -1,0 +1,13 @@
+.input-group.round-borders input {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.input-group.round-borders .input-group-text {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.fa.fa-search {
+  color: #9aa0a6;
+}
