@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from markdown2 import Markdown
 
 from . import util
+from .forms.createEntryForm import CreateEntryForm
 
 markdowner = Markdown()
 
@@ -36,3 +36,9 @@ def search(req):
             
     else:
         return render(req, "encyclopedia/view-entry.html", { "entry": markdowner.convert(entry) })
+
+def createEntry(req):
+    # if req.method =='POST':
+    # 
+    # else:
+    return render(req, "encyclopedia/create-entry.html", {"form": CreateEntryForm})

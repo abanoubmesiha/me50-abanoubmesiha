@@ -13,7 +13,7 @@ h1 {
 }
 
 textarea {
-    height: 90vh;
+    height: 50vh;
     width: 80%;
 }
 
@@ -35,4 +35,14 @@ textarea {
 
 .sidebar h2 {
     margin-top: 5px;
+}
+
+.field {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.field label {
+    margin-right: 5px;
+    width: 60px;
 }
