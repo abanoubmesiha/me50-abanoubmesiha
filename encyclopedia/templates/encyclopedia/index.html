@@ -8,9 +8,9 @@
     <h1>All Pages</h1>
 
     <ul>
-        {% for entry in entries %}
+        {% for entryTitle in entriesTitles %}
             <li>
-                <a href="/wiki/{{ entry }}">{{ entry }}</a>
+                <a href="/wiki/{{ entryTitle }}">{{ entryTitle }}</a>
             </li>
         {% endfor %}
     </ul>

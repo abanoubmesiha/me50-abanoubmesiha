@@ -1,13 +1,14 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from markdown2 import Markdown
 
 from . import util
 
 markdowner = Markdown()
 
-def index(request):
-    return render(request, "encyclopedia/index.html", {
-        "entries": util.list_entries()
+def index(req):
+    return render(req, "encyclopedia/index.html", {
+        "entriesTitles": util.list_entries()
     })
 
 def getEntry(req, title):
@@ -18,5 +19,20 @@ def getEntry(req, title):
         return render(req, "encyclopedia/view-entry.html", { "entry": markdowner.convert(entry) })
 
 def search(req):
-    q = req.GET.get('q')
-    return HttpResponse(q)
+    q = req.POST['q']
+    entry = util.get_entry(q)
+    if entry is None:
+        entriesTitles = util.list_entries()
+        foundEntries = []
+        for title in entriesTitles:
+            if q.lower() in title.lower():
+                foundEntries.append(title)
+        if foundEntries:
+            return render(req, "encyclopedia/index.html", {
+                "entriesTitles": foundEntries
+            })
+        else:
+            return render(req, "encyclopedia/404.html", { "title": q })
+            
+    else:
+        return render(req, "encyclopedia/view-entry.html", { "entry": markdowner.convert(entry) })
