@@ -6,13 +6,22 @@
 
 {% block body %}
     <h1>Create Entry</h1>
-    <form action="/create-entry" method="post">
+    <form action="/create-entry" method="post" id="createEntryForm">
         {% csrf_token %}
         {% for field in form %}
-            <div class="field">
-                {{ field.errors }}
-                {{ field.label_tag }} {{ field }}
+            <div class="row">
+                <div class="col-md-1">
+                    {{ field.label_tag }}
+                </div>
+                <div class="col-md-8">
+                    {{ field }}
+                </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+            <div class="row">
+                <div class="offset-md-1 col-md-8">
+                    <input type="submit" value="Submit">
+                </div>
+            </div>
     </form>
 {% endblock %}

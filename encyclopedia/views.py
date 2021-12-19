@@ -1,3 +1,5 @@
+from django.http.response import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.shortcuts import render
 from markdown2 import Markdown
 
@@ -38,7 +40,18 @@ def search(req):
         return render(req, "encyclopedia/view-entry.html", { "entry": markdowner.convert(entry) })
 
 def createEntry(req):
-    # if req.method =='POST':
-    # 
-    # else:
-    return render(req, "encyclopedia/create-entry.html", {"form": CreateEntryForm})
+    if req.method =='POST':
+        form = CreateEntryForm(req.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+            isExist = util.get_entry(title)
+            if isExist is None:
+                util.save_entry(title, content)
+                return HttpResponseRedirect(reverse('view-entry', kwargs={"title": title}))
+            else:
+                return render(req, "encyclopedia/exist.html", { "title": title })
+        else: 
+            return render(req, "encyclopedia/create-entry.html", {"form": CreateEntryForm})
+    else:
+        return render(req, "encyclopedia/create-entry.html", {"form": CreateEntryForm})
