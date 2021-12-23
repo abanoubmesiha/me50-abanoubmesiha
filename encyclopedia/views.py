@@ -22,9 +22,12 @@ def getEntry(req, title):
 
 def search(req):
     q = req.POST['q']
-    entry = util.get_entry(q)
-    if entry is None:
-        entriesTitles = util.list_entries()
+    entriesTitles = util.list_entries()
+    entriesTitlesLower = list(map(lambda s:s.lower(), entriesTitles))
+
+    if q.lower() in entriesTitlesLower:
+        return HttpResponseRedirect(reverse('view-entry', kwargs={"title": q}))
+    else:
         foundEntries = []
         for title in entriesTitles:
             if q.lower() in title.lower():
@@ -35,10 +38,6 @@ def search(req):
             })
         else:
             return render(req, "encyclopedia/404.html", { "title": q })
-            
-    else:
-        return render(req, "encyclopedia/view-entry.html", { "entry": markdowner.convert(entry) })
-
 def createEntry(req):
     if req.method =='POST':
         form = CreateEntryForm(req.POST)
