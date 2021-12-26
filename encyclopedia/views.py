@@ -1,7 +1,8 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from markdown2 import Markdown
+import random 
 
 from . import util
 from .forms.entryForm import EntryForm
@@ -76,3 +77,8 @@ def editEntry(req, title):
             "form": EntryForm({ 'title': title, 'content': content }),
             "title": title
         })
+
+def randomEntry(req):
+    entriesTitles = util.list_entries()
+    title = random.choice(entriesTitles)
+    return HttpResponseRedirect(reverse('view-entry', kwargs={"title": title}))
