@@ -4,7 +4,7 @@ from django.shortcuts import render
 from markdown2 import Markdown
 
 from . import util
-from .forms.createEntryForm import CreateEntryForm
+from .forms.entryForm import EntryForm
 
 markdowner = Markdown()
 
@@ -18,7 +18,10 @@ def getEntry(req, title):
     if entry is None:
         return render(req, "encyclopedia/404.html", { "title": title })
     else:
-        return render(req, "encyclopedia/view-entry.html", { "entry": markdowner.convert(entry) })
+        return render(req, "encyclopedia/view-entry.html", {
+            "title": title,
+            "entry": markdowner.convert(entry),
+        })
 
 def search(req):
     q = req.POST['q']
@@ -38,9 +41,10 @@ def search(req):
             })
         else:
             return render(req, "encyclopedia/404.html", { "title": q })
+
 def createEntry(req):
     if req.method =='POST':
-        form = CreateEntryForm(req.POST)
+        form = EntryForm(req.POST)
         if form.is_valid():
             title = form.cleaned_data['title']
             content = form.cleaned_data['content']
@@ -51,6 +55,24 @@ def createEntry(req):
             else:
                 return render(req, "encyclopedia/exist.html", { "title": title })
         else: 
-            return render(req, "encyclopedia/create-entry.html", {"form": CreateEntryForm})
+            return render(req, "encyclopedia/create-entry.html", {"form": EntryForm})
     else:
-        return render(req, "encyclopedia/create-entry.html", {"form": CreateEntryForm})
+        return render(req, "encyclopedia/create-entry.html", {"form": EntryForm})
+
+def editEntry(req, title):
+    if req.method == 'POST':
+        form = EntryForm(req.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+            util.save_entry(title, content)
+            return HttpResponseRedirect(reverse('view-entry', kwargs={"title": title}))
+        else: 
+            return render(req, "encyclopedia/edit-entry.html", { "form": form })
+    else:
+        content = util.get_entry(title)
+
+        return render(req, "encyclopedia/edit-entry.html", {
+            "form": EntryForm({ 'title': title, 'content': content }),
+            "title": title
+        })

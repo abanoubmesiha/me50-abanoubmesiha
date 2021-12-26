@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Create Entry</h1>
-    <form action="/create-entry" method="post" id="createEntryForm">
+    <h1>Edit Entry</h1>
+    <form action="/wiki/{{ title }}/edit/" method="post" id="editEntryForm">
         {% csrf_token %}
         {% for field in form %}
             <div class="row">
